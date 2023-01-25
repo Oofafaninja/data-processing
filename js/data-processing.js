@@ -2,7 +2,13 @@
 
 const queryString = window.location.search;
 
-
+function titleCase(str){
+    str = str.toLowerCase().split(" ");
+    for(var i = 0; i < str.length; i++){
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(" ");
+}
 
 
 if(queryString.length > 0){
@@ -46,6 +52,11 @@ if(queryString.length > 0){
         }
         else{//process shipping
             key = key.split("_").join(" ");
+
+            if(key == "First Name" || key == "Last Name" || key == "Address" || key == "City"){
+                value = titleCase(value)
+            }
+
             //console.log(key, value);
             myData += `<p>${key}: ${value}</p>`;
         }
